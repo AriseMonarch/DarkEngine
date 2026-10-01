@@ -3,6 +3,8 @@ from search_engine import txt
 from search_engine import directories
 from search_engine import pdf
 from search_engine import powerpoint
+from PIL import Image, ImageDraw , ImageTk
+import math
 import threading
 import queue
 
@@ -139,11 +141,27 @@ catchIT4 = queue.Queue()
 search = tk.Entry(root)
 canvas.place(x=-5, y=0)
 search.place(x=430, y=0)
-glow = canvas.create_oval(480,280,520,320, fill= "#5B0080", outline= '#5B0080')
+glow = Image.new("RGBA",(200,200),(91, 0, 128, 0))
+draw = ImageDraw.Draw(glow)
 
+
+for x in range(200):
+ for y in range(200):
+  horizontal = (x - 100) ** 2 
+  vertical = (y - 100) ** 2
+  distance = (horizontal + vertical)
+  squere_root = math.sqrt(distance)
+  away_center = squere_root / 100 
+  if squere_root <= 100:
+   real_distance = 1 - away_center
+   alpha = int(real_distance * 255)
+   draw.point((x,y), fill=(91 ,0 ,128 ,alpha ))
+
+real_glow = ImageTk.PhotoImage(glow)
+glow_image = canvas.create_image(500,300, image= real_glow)
 
 def mouse_animated(position):
- canvas.coords(glow,position.x -20 , position.y -20, position.x + 20, position.y +20)
+ canvas.coords(glow_image,position.x, position.y)
 
 canvas.bind('<Motion>',mouse_animated)
 
