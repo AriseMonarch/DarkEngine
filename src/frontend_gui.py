@@ -7,6 +7,7 @@ from PIL import Image, ImageDraw , ImageTk, ImageDraw, ImageFont, ImageText , Im
 import math
 import threading
 import queue
+from pathlib import Path
 
 font = r'C:\Windows\Fonts\Micross.ttf.'
 
@@ -226,20 +227,23 @@ for i in range(26):
 glow_image = canvas.create_image(500,300)
 #----------------------------------------------------------------
 
+
+BASE_DIR = Path(__file__).resolve().parent
+
 #Custom images for the buttons--------------------------------------------
-search_folder_image = Image.open('search_folder.png')
+search_folder_image = Image.open(BASE_DIR / 'search_folder.png')
 search_folder_image_size = search_folder_image.resize((100,60))
 search_folder_image_real = ImageTk.PhotoImage(search_folder_image_size)
 
-search_pdf_image = Image.open('search_pdf.png')
+search_pdf_image = Image.open(BASE_DIR / 'search_pdf.png')
 search_pdf_image_size = search_pdf_image.resize((100,60))
 search_pdf_image_real = ImageTk.PhotoImage(search_pdf_image_size)
 
-search_pptx_image = Image.open('search_pptx.png')
+search_pptx_image = Image.open(BASE_DIR / 'search_pptx.png')
 search_pptx_image_size = search_pptx_image.resize((100,60))
 search_pptx_image_real = ImageTk.PhotoImage(search_pptx_image_size)
 
-search_txt_image = Image.open('search_txt.png')
+search_txt_image = Image.open(BASE_DIR / 'search_txt.png')
 search_txt_image_size = search_txt_image.resize((100,60))
 search_txt_image_real = ImageTk.PhotoImage(search_txt_image_size)
 
